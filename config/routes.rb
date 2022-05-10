@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   post '/lots', to: 'lots#create'
   get '/lots/:id', to: 'lots#show'
   get '/lots/:id/edit', to: 'lots#edit'
+  patch '/lots'
 end
