@@ -1,0 +1,11 @@
+<%= form_with url: 'lots', method: :post, local: true do |form| %>
+<%= form.label :name %>
+<%= form.text_field :name %><br>
+<%= form.label :lot_number %>
+<%= form.text_field :lot_number %><br>
+<%= form.label :importer %>
+<%= form.text_field :importer %><br>
+<%= form.label :organic %>
+<%= form.check_box :organic %><br>
+<%= form.submit %>
+<% end %>
