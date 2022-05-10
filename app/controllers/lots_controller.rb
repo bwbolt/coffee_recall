@@ -1,6 +1,6 @@
 class LotsController < ApplicationController
   def index
-    @lots = Lot.all
+    @lots = Lot.all.sort_by { |lot| lot.created_at }.reverse
   end
 
   def create
