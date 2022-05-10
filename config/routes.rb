@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   get '/lots/:id', to: 'lots#show'
   get '/lots/:id/edit', to: 'lots#edit'
   patch '/lots/:id', to: 'lots#update'
+  delete '/lots/:id', to: 'lots#destroy'
 end
