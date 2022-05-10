@@ -17,4 +17,8 @@ class LotsController < ApplicationController
   def show
     @lot = Lot.find(params[:id])
   end
+
+  def edit
+    @lot = Lot.find(params[:id])
+  end
 end
