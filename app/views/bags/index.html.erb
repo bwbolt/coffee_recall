@@ -1,5 +1,7 @@
 <h1>All Bags</h1>
 
 <% @bags.each do |bag| %>
-  <p><%= bag %></p>
+  <a href="/bags/<%= bag.id %>">
+    <%= bag.roast %></a>
+  <%= bag.created_at %>
 <% end %>
