@@ -16,6 +16,7 @@ class LotsController < ApplicationController
 
   def show
     @lot = Lot.find(params[:id])
+    @bags = Bag.where(lot_id: params[:id])
   end
 
   def edit
