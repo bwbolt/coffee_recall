@@ -1,6 +1,6 @@
 class LotsController < ApplicationController
   def index
-    @lots = %w[lot1 lot2 lot3]
+    @lots = Lot.all
   end
 
   def create
