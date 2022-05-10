@@ -1,5 +1,9 @@
 class BagsController < ApplicationController
   def index
-    @bags = %w[bag1 bag2 bag3]
+    @bags = Bag.all
+  end
+
+  def show
+    @bag = Bag.find(params[:id])
   end
 end
