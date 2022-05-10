@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   get '/lots', to: 'lots#index'
   get '/lots/new', to: 'lots#new'
   post '/lots', to: 'lots#create'
+  get '/lots/:id', to: 'lots#show'
 end
