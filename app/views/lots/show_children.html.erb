@@ -1,0 +1,11 @@
+<h1><%= @lot.name %></h1>
+
+<% @bags.each do |bag| %>
+  Roast:
+  <%= bag.roast %>
+  Ground:
+  <%= bag.ground %>
+  Bag Date:
+  <%= bag.created_at %>
+  <br>
+<% end %>

@@ -39,4 +39,9 @@ class LotsController < ApplicationController
     Lot.destroy(params[:id])
     redirect_to '/lots'
   end
+
+  def show_children
+    @lot = Lot.find(params[:id])
+    @bags = Bag.where(lot_id: params[:id])
+  end
 end
