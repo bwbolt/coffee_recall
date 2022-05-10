@@ -10,9 +10,11 @@ class LotsController < ApplicationController
                     importer: params[:importer],
                     organic: params[:organic]
                   })
-
     lot.save
-
     redirect_to '/lots'
+  end
+
+  def show
+    @lot = Lot.find(params[:id])
   end
 end
