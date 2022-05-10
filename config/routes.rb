@@ -3,4 +3,5 @@ Rails.application.routes.draw do
 
   get '/', to: 'welcome#index'
   get '/lots', to: 'lots#index'
+  get '/lots/new', to: 'lots#new'
 end
