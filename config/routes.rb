@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   get '/lots/new', to: 'lots#new'
   post '/lots', to: 'lots#create'
   get '/lots/:id', to: 'lots#show'
+  get '/lots/:id/edit', to: 'lots#edit'
 end
