@@ -5,4 +5,8 @@
     <a href="/lots/<%= lot.id %>"><%= lot.name %></a>
   </h3>
   <p><%= lot.importer %></p>
+  <p>
+    <a href="/lots/<%= lot.id %>/edit">Edit</a>
+  </p>
+  <p><%= link_to "Delete" , "/lots/#{lot.id}" , method: :delete%></p>
 <% end %>
