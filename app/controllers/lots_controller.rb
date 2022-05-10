@@ -34,4 +34,9 @@ class LotsController < ApplicationController
 
     redirect_to "/lots/#{lot.id}"
   end
+
+  def destroy
+    Lot.destroy(params[:id])
+    redirect_to '/lots'
+  end
 end
