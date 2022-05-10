@@ -7,5 +7,7 @@
   <%= @lot.importer %></p>
 <p>Organic:
   <%= @lot.organic %></p>
+<p>Number of Bags from this lot:
+  <%= @bags.count %></p>
 <a href="/lots/<%= @lot.id %>/edit">Edit</a><br>
 <a href="/lots/<%= @lot.id %>/bags">Bags</a>
