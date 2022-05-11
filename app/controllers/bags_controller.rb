@@ -22,4 +22,20 @@ class BagsController < ApplicationController
 
     redirect_to "/lots/#{params[:id]}/bags"
   end
+
+  def edit
+    @bag = Bag.find(params[:id])
+  end
+
+  def update
+    bag = Bag.find(params[:id])
+    bag.update({
+                 roast: params[:roast],
+                 size: params[:size],
+                 ground: params[:ground]
+               })
+    bag.save
+
+    redirect_to "/bags/#{bag.id}"
+  end
 end
