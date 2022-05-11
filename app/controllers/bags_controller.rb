@@ -1,6 +1,6 @@
 class BagsController < ApplicationController
   def index
-    @bags = Bag.all
+    @bags = Bag.where(ground: true)
   end
 
   def show
