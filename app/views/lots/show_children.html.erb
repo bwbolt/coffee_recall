@@ -1,5 +1,7 @@
 <h1><%= @lot.name %></h1>
 
+<a class="btn btn-success" href="/lots/<%= @lot.id %>/bags/new" role="button">Create Bag</a><br>
+
 <% @bags.each do |bag| %>
   Roast:
   <%= bag.roast %>

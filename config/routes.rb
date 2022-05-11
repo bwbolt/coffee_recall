@@ -13,4 +13,6 @@ Rails.application.routes.draw do
 
   get '/bags', to: 'bags#index'
   get '/bags/:id', to: 'bags#show'
+  get '/lots/:id/bags/new', to: 'bags#new'
+  post '/lots/:id/bags/new', to: 'bags#create'
 end
