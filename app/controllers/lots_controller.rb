@@ -42,7 +42,12 @@ class LotsController < ApplicationController
   end
 
   def show_children
-    @lot = Lot.find(params[:id])
-    @bags = Bag.where(lot_id: params[:id])
+    if params[:sort] == 'name'
+      @lot = Lot.find(params[:id])
+      @bags = Bag.where(lot_id: params[:id]).sort_by { |bag| bag.roast }
+    else
+      @lot = Lot.find(params[:id])
+      @bags = Bag.where(lot_id: params[:id])
+    end
   end
 end
