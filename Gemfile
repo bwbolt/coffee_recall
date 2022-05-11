@@ -39,8 +39,10 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'capybara'
   gem 'launchy'
+  gem 'orderly'
   gem 'pry'
   gem 'rspec-rails'
+  gem 'shoulda-matchers'
   gem 'simplecov'
 end
 
