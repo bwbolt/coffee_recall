@@ -2,6 +2,8 @@
 
 <a class="btn btn-success" href="/lots/<%= @lot.id %>/bags/new" role="button">Create Bag</a><br>
 
+<a href="/lots/<%= @lot.id %>/bags?sort=name">Sort</a><br>
+
 <% @bags.each do |bag| %>
   Roast:
   <%= bag.roast %>
