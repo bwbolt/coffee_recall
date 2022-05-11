@@ -1,5 +1,7 @@
 <h1>All Lots</h1>
 
+<a class="btn btn-success" href="/lots/new" role="button">New Lot</a>
+
 <% @lots.each do |lot| %>
   <h3>
     <a href="/lots/<%= lot.id %>"><%= lot.name %></a>
