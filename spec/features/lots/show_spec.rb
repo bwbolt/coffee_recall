@@ -24,4 +24,11 @@ RSpec.describe 'lots#show', type: :feature do
     visit "/lots/#{lot2.id}"
     expect(page).to have_content('Number of Bags from this lot: 1')
   end
+
+  it 'has link to associated bags' do
+    lot1 = Lot.create!(name: 'honduras', lot_number: 55, organic: false)
+    bag = Bag.create!(roast: 'medium', ground: true, size: 340, lot_id: lot1.id)
+    visit "/lots/#{lot1.id}"
+    expect(page).to have_link('Bags made from this lot')
+  end
 end
