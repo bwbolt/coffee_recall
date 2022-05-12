@@ -3,6 +3,10 @@
 <% @bags.each do |bag| %>
   <a href="/bags/<%= bag.id %>">
     <%= bag.roast %></a>
+  <%= bag.ground %>
+  <%= bag.size %>
+  <%= bag.id %>
   <%= bag.created_at %>
+  <%= bag.updated_at %>
   <br>
 <% end %>
