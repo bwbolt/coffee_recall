@@ -1,5 +1,3 @@
-<a href="/lots">
-  Lots Index</a>
 <h1><%= @lot.name %></h1>
 <p>Lot Number:
   <%= @lot.lot_number %></p>
@@ -9,5 +7,11 @@
   <%= @lot.organic %></p>
 <p>Number of Bags from this lot:
   <%= @bags.count %></p>
+<p>ID:
+  <%= @lot.id %></p>
+<p>Created:
+  <%= @lot.created_at %></p>
+<p>Updated:
+  <%= @lot.updated_at %></p>
 <a href="/lots/<%= @lot.id %>/edit">Edit</a><br>
 <a href="/lots/<%= @lot.id %>/bags">Bags</a>
