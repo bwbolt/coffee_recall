@@ -5,11 +5,12 @@
 <a href="/lots/<%= @lot.id %>/bags?sort=name">Sort</a><br>
 
 <% @bags.each do |bag| %>
-  Roast:
-  <%= bag.roast %>
-  Ground:
+  <a href="/bags/<%= bag.id %>">
+    <%= bag.roast %></a>
   <%= bag.ground %>
-  Bag Date:
+  <%= bag.size %>
+  <%= bag.id %>
   <%= bag.created_at %>
+  <%= bag.updated_at %>
   <br>
 <% end %>

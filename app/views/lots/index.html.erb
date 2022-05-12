@@ -5,6 +5,7 @@
 <% @lots.each do |lot| %>
   <h3>
     <a href="/lots/<%= lot.id %>"><%= lot.name %></a>
+    <%= lot.created_at %>
   </h3>
   <p>
     <a href="/lots/<%= lot.id %>/edit">Edit</a>
