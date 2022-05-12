@@ -40,4 +40,15 @@ RSpec.describe 'bags#index', type: :feature do
     visit "/lots/#{lot1.id}/bags/new"
     expect(page).to have_link('Bags')
   end
+
+  it "only shows bags with the value 'true' for ground" do
+    lot1 = Lot.create!(name: 'honduras', lot_number: 55, organic: false)
+    bag1 = Bag.create!(roast: 'dark', ground: true, size: 340, lot_id: lot1.id)
+    bag2 = Bag.create!(roast: 'medium', ground: false, size: 340, lot_id: lot1.id)
+    bag3 = Bag.create!(roast: 'light', ground: true, size: 340, lot_id: lot1.id)
+    visit '/bags'
+    expect(page).to have_content('dark')
+    expect(page).to have_content('light')
+    expect(page).to_not have_content('medium')
+  end
 end
