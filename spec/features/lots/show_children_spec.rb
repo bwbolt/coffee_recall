@@ -21,4 +21,17 @@ RSpec.describe 'lots#show_children', type: :feature do
     expect(page).to have_content(bag3.created_at)
     expect(page).to have_content(bag3.updated_at)
   end
+
+  it "has a working button to sort by 'name' (roast)" do
+    lot1 = Lot.create!(name: 'honduras', lot_number: 55, organic: false)
+    bag1 = Bag.create!(roast: 'light', ground: true, size: 340, lot_id: lot1.id)
+    bag2 = Bag.create!(roast: 'dark', ground: true, size: 60, lot_id: lot1.id)
+    bag3 = Bag.create!(roast: 'medium', ground: true, size: 500, lot_id: lot1.id)
+    visit "/lots/#{lot1.id}/bags"
+    expect(bag1.roast).to appear_before(bag2.roast)
+    expect(page).to have_link('Sort')
+    click_link('Sort')
+    expect(current_path).to eq("/lots/#{lot1.id}/bags")
+    expect(bag2.roast).to appear_before(bag3.roast)
+  end
 end
