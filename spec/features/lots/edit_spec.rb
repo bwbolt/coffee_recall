@@ -16,4 +16,12 @@ RSpec.describe 'lots#edit', type: :feature do
     expect(current_path).to eq("/lots/#{lot1.id}")
     expect(page).to have_content('Ethiopia')
   end
+
+  it 'has a link from lots index' do
+    lot1 = Lot.create!(name: 'honduras', lot_number: 55, organic: false)
+    visit '/lots'
+    expect(page).to have_link('Edit')
+    click_link('Edit')
+    expect(current_path).to eq("/lots/#{lot1.id}/edit")
+  end
 end
