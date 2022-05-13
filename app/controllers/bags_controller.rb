@@ -38,4 +38,9 @@ class BagsController < ApplicationController
 
     redirect_to "/bags/#{bag.id}"
   end
+
+  def destroy
+    Bag.destroy(params[:id])
+    redirect_to '/bags'
+  end
 end
