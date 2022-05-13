@@ -31,4 +31,18 @@ RSpec.describe 'lots#show', type: :feature do
     visit "/lots/#{lot1.id}"
     expect(page).to have_link('Bags made from this lot')
   end
+
+  it 'has a button to delete the lot and all associated bags' do
+    lot1 = Lot.create!(name: 'honduras', lot_number: 55, organic: false)
+    bag = Bag.create!(roast: 'Slightly Dangerous', ground: true, size: 340, lot_id: lot1.id)
+    visit '/bags'
+    expect(page).to have_content('Slightly Dangerous')
+    visit "/lots/#{lot1.id}"
+    expect(page).to have_link('Delete Lot')
+    click_link('Delete Lot')
+    expect(current_path).to eq('/lots')
+    expect(page).to_not have_content('honduras')
+    visit '/bags'
+    expect(page).to_not have_content('Slightly Dangerous')
+  end
 end
