@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'bags#new', type: :feature do
   it 'lot bag index has a button to create a new bag which takes to working view' do
-    lot1 = Lot.create!(name: 'honduras', lot_number: 55, organic: false)
+    lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
     bag = Bag.create!(roast: 'medium', ground: true, size: 340, lot_id: lot1.id)
     visit "/lots/#{lot1.id}/bags"
     expect(page).to have_link('Create Bag')
