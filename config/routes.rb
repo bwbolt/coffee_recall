@@ -17,4 +17,5 @@ Rails.application.routes.draw do
   patch '/bags/:id', to: 'bags#update'
   get '/lots/:id/bags/new', to: 'bags#new'
   post '/lots/:id/bags/new', to: 'bags#create'
+  delete '/bags/:id', to: 'bags#destroy'
 end
