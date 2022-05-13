@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'bags#show', type: :feature do
   it 'shows a specific bag and its attributes' do
-    lot1 = Lot.create!(name: 'honduras', lot_number: 55, organic: false)
+    lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
     bag = Bag.create!(roast: 'medium', ground: true, size: 340, lot_id: lot1.id)
     visit "/bags/#{bag.id}"
     expect(page).to have_content(bag.roast)
@@ -14,7 +14,7 @@ RSpec.describe 'bags#show', type: :feature do
   end
 
   it 'has a working delete button' do
-    lot1 = Lot.create!(name: 'honduras', lot_number: 55, organic: false)
+    lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
     bag = Bag.create!(roast: 'Slightly Dangerous', ground: true, size: 340, lot_id: lot1.id)
     visit '/bags'
     expect(page).to have_content('Slightly Dangerous')

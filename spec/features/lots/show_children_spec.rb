@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'lots#show_children', type: :feature do
   it 'shows all bags associated with that particular lot' do
-    lot1 = Lot.create!(name: 'honduras', lot_number: 55, organic: false)
-    lot2 = Lot.create!(name: 'guat', lot_number: 67, organic: true)
+    lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
+    lot2 = Lot.create!(name: 'guat', importer: 'lamanita', lot_number: 67, organic: true)
     bag1 = Bag.create!(roast: 'medium', ground: true, size: 340, lot_id: lot1.id)
     bag2 = Bag.create!(roast: 'dark', ground: true, size: 60, lot_id: lot2.id)
     bag3 = Bag.create!(roast: 'light', ground: true, size: 60, lot_id: lot1.id)
@@ -23,7 +23,7 @@ RSpec.describe 'lots#show_children', type: :feature do
   end
 
   it "has a working button to sort by 'name' (roast)" do
-    lot1 = Lot.create!(name: 'honduras', lot_number: 55, organic: false)
+    lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
     bag1 = Bag.create!(roast: 'light', ground: true, size: 340, lot_id: lot1.id)
     bag2 = Bag.create!(roast: 'dark', ground: true, size: 60, lot_id: lot1.id)
     bag3 = Bag.create!(roast: 'medium', ground: true, size: 500, lot_id: lot1.id)
@@ -36,7 +36,7 @@ RSpec.describe 'lots#show_children', type: :feature do
   end
 
   it 'has a display by size input' do
-    lot1 = Lot.create!(name: 'honduras', lot_number: 55, organic: false)
+    lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
     bag1 = Bag.create!(roast: 'light', ground: true, size: 340, lot_id: lot1.id)
     bag2 = Bag.create!(roast: 'dark', ground: true, size: 60, lot_id: lot1.id)
     bag3 = Bag.create!(roast: 'medium', ground: true, size: 500, lot_id: lot1.id)
