@@ -10,4 +10,5 @@
   <p>
     <a href="/lots/<%= lot.id %>/edit">Edit</a>
   </p>
+  <p><%= link_to "Delete Lot" , "/lots/#{lot.id}" , method: :delete%></p>
 <% end %>
