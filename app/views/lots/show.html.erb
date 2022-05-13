@@ -15,3 +15,4 @@
   <%= @lot.updated_at %></p>
 <a href="/lots/<%= @lot.id %>/edit">Update Lot</a><br>
 <a href="/lots/<%= @lot.id %>/bags">Bags made from this lot</a>
+<p><%= link_to "Delete Lot" , "/lots/#{@lot.id}" , method: :delete%></p>
