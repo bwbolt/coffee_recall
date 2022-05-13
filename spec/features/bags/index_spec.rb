@@ -51,4 +51,15 @@ RSpec.describe 'bags#index', type: :feature do
     expect(page).to have_content('light')
     expect(page).to_not have_content('medium')
   end
+
+  it 'has a working delete bag button for every bag' do
+    lot1 = Lot.create!(name: 'honduras', lot_number: 55, organic: false)
+    bag1 = Bag.create!(roast: 'dark', ground: true, size: 340, lot_id: lot1.id)
+    visit '/bags'
+    expect(page).to have_content('dark')
+    expect(page).to have_link('Delete Bag')
+    click_link('Delete Bag')
+    expect(current_path).to eq('/bags')
+    expect(page).to_not have_content('dark')
+  end
 end
