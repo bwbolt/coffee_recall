@@ -12,14 +12,7 @@ class BagsController < ApplicationController
   end
 
   def create
-    bag = Bag.new({
-                    roast: params[:roast],
-                    size: params[:size],
-                    ground: params[:ground],
-                    lot_id: params[:id]
-                  })
-    bag.save
-
+    Bag.create(bags_params)
     redirect_to "/lots/#{params[:id]}/bags"
   end
 
@@ -35,12 +28,15 @@ class BagsController < ApplicationController
                  ground: params[:ground]
                })
     bag.save
-
     redirect_to "/bags/#{bag.id}"
   end
 
   def destroy
     Bag.destroy(params[:id])
     redirect_to '/bags'
+  end
+
+  def bags_params
+    params.permit(:roast, :ground, :size, :lot_id)
   end
 end
