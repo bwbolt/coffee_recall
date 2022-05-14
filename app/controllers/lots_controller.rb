@@ -1,22 +1,15 @@
 class LotsController < ApplicationController
   def index
-    @lots = Lot.all.sort_by { |lot| lot.created_at }.reverse
+    @lots = Lot.order(created_at: :desc)
   end
 
   def create
-    lot = Lot.new({
-                    name: params[:name],
-                    lot_number: params[:lot_number],
-                    importer: params[:importer],
-                    organic: params[:organic]
-                  })
-    lot.save
+    Lot.create(lots_params)
     redirect_to '/lots'
   end
 
   def show
     @lot = Lot.find(params[:id])
-    @bags = Bag.where(lot_id: params[:id])
   end
 
   def edit
@@ -32,7 +25,6 @@ class LotsController < ApplicationController
                  organic: params[:organic]
                })
     lot.save
-
     redirect_to "/lots/#{lot.id}"
   end
 
@@ -42,18 +34,21 @@ class LotsController < ApplicationController
   end
 
   def show_children
-    if params[:sort] == 'name' && !params[:size].nil?
+    if !params[:size].nil? && params[:size] != ''
       @lot = Lot.find(params[:id])
-      @bags = Bag.where(lot_id: params[:id]).where("size >= #{params[:size].to_i}").sort_by { |bag| bag.roast }
-    elsif !params[:size].nil?
-      @lot = Lot.find(params[:id])
-      @bags = Bag.where("size >= #{params[:size].to_i}").where(lot_id: params[:id])
+      @bags = @lot.bags_larger_than(params[:size])
     elsif params[:sort] == 'name'
       @lot = Lot.find(params[:id])
-      @bags = Bag.where(lot_id: params[:id]).sort_by { |bag| bag.roast }
+      @bags = @lot.bags.order('lower(roast)')
     else
       @lot = Lot.find(params[:id])
       @bags = Bag.where(lot_id: params[:id])
     end
+  end
+
+  private
+
+  def lots_params
+    params.permit(:name, :lot_number, :importer, :organic)
   end
 end
