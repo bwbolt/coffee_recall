@@ -52,4 +52,16 @@ RSpec.describe 'lots#index', type: :feature do
     expect(current_path).to eq('/lots')
     expect(page).to_not have_content('honduras')
   end
+
+  it "has a 'sort by bags' button that works" do
+    lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
+    bag = Bag.create!(roast: 'medium', ground: true, size: 340, lot_id: lot1.id)
+    lot2 = Lot.create!(name: 'brazil', importer: 'sweet marias', lot_number: 44, organic: true)
+    visit '/lots'
+    expect('brazil').to appear_before('honduras')
+    expect(page).to have_link('Sort by number of bags')
+    click_link 'Sort by number of bags'
+    expect(current_path).to eq('/lots')
+    expect('honduras').to appear_before('brazil')
+  end
 end
