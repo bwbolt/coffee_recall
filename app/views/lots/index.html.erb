@@ -1,12 +1,15 @@
 <h1>All Lots</h1>
 
-<a class="btn btn-success btn-lg" href="/lots/new" role="button">New Lot</a>
+<a class="btn btn-success btn-lg" href="/lots/new" role="button">New Lot</a><br>
+
+<a href="/lots?sort=number_of_bags">Sort by number of bags</a>
 
 <% @lots.each do |lot| %>
   <h3>
     <a href="/lots/<%= lot.id %>"><%= lot.name %></a>
     <%= lot.created_at %>
   </h3>
+  Bags from this lot:<%= lot.bag_count %>
   <%= button_to "Edit" , "/lots/#{lot.id}/edit" , method: :get, class: "btn btn-warning btn-xs p-0"%>
   <%= button_to "Delete Lot" , "/lots/#{lot.id}" , method: :delete, class: "btn btn-danger btn-xs p-0"%>
 <% end %>
