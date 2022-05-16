@@ -2,8 +2,8 @@
   <%= @lot.name %></h1>
 
 <%= form_with url: "/lots/#{@lot.id}/bags/new", method: :post, local: true do |form| %>
-<%= form.label :roast %>
-<%= form.text_field :roast %><br>
+<%= form.label :name %>
+<%= form.text_field :name %><br>
 <%= form.label :size %>
 <%= form.text_field :size %><br>
 <%= form.label :ground %>

@@ -35,6 +35,6 @@ class BagsController < ApplicationController
   private
 
   def bags_params
-    params.permit(:roast, :ground, :size, :lot_id)
+    params.permit(:name, :ground, :size, :lot_id)
   end
 end

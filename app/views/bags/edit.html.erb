@@ -1,6 +1,6 @@
 <%= form_with url: "/bags/#{@bag.id}", method: :patch, local: true do |form| %>
-<%= form.label :roast %>
-<%= form.text_field :roast, value: @bag.roast %><br>
+<%= form.label :name %>
+<%= form.text_field :name, value: @bag.name %><br>
 <%= form.label :size %>
 <%= form.text_field :size, value: @bag.size %><br>
 <%= form.label :ground %>

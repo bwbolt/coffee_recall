@@ -1,7 +1,7 @@
 <h1>All Bags</h1>
 
 <% @bags.each do |bag| %>
-  <%= link_to "#{bag.roast}", "/bags/#{bag.id}" %>
+  <%= link_to "#{bag.name}", "/bags/#{bag.id}" %>
   <%= bag.ground %>
   <%= bag.size %>
   <%= bag.id %>
