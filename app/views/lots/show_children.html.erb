@@ -1,22 +1,22 @@
 <h1><%= @lot.name %></h1>
 
-<a class="btn btn-success" href="/lots/<%= @lot.id %>/bags/new" role="button">Create Bag</a><br>
+<%= link_to "Create Bag", "/lots/#{@lot.id}/bags/new", class:"btn btn-success"%>
 
 <%= form_with url: "/lots/#{@lot.id}/bags?sort=length", method: :get, local: true do |form| %>
 <%= form.submit "Search By Bag Size" %>
 <%= form.number_field :size %>
 <% end %>
 
-<a href="/lots/<%= @lot.id %>/bags?sort=name">Sort</a><br>
+<%= link_to "Sort", "/lots/#{@lot.id}/bags?sort=name", class:"btn btn-info btn-xs p-0"%><br>
 
 <% @bags.each do |bag| %>
-<a href="/bags/<%= bag.id %>">
-  <%= bag.roast %></a>
-<%= bag.ground %>
-<%= bag.size %>
-<%= bag.id %>
-<%= bag.created_at %>
-<%= bag.updated_at %>
-<a href="/bags/<%= bag.id %>/edit">Update Bag</a>
-<br>
+<div>
+  <%= link_to "#{bag.roast}", "/bags/#{bag.id}" %>
+  <%= bag.ground %>
+  <%= bag.size %>
+  <%= bag.id %>
+  <%= bag.created_at %>
+  <%= bag.updated_at %>
+  <%= link_to "Update Bag", "/bags/#{bag.id}/edit" %>
+</div>
 <% end %>

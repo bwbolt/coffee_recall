@@ -13,6 +13,7 @@
   <%= @lot.created_at %></p>
 <p>Updated:
   <%= @lot.updated_at %></p>
-<a href="/lots/<%= @lot.id %>/edit">Update Lot</a><br>
-<a href="/lots/<%= @lot.id %>/bags">Bags made from this lot</a>
-<p><%= link_to "Delete Lot" , "/lots/#{@lot.id}" , method: :delete%></p>
+
+<%= link_to "Update Lot", "/lots/#{@lot.id}/edit", class: "btn btn-warning btn-xs p-0" %><br>
+<%= link_to "Bags made from this lot", "/lots/#{@lot.id}/bags", class: "btn btn-info btn-xs p-0" %><br>
+<%= link_to "Delete Lot" , "/lots/#{@lot.id}" , method: :delete, class: "btn btn-danger btn-xs p-0"%>
