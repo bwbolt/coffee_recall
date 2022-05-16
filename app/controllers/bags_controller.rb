@@ -22,11 +22,7 @@ class BagsController < ApplicationController
 
   def update
     bag = Bag.find(params[:id])
-    bag.update({
-                 roast: params[:roast],
-                 size: params[:size],
-                 ground: params[:ground]
-               })
+    bag.update(bags_params)
     bag.save
     redirect_to "/bags/#{bag.id}"
   end
@@ -35,6 +31,8 @@ class BagsController < ApplicationController
     Bag.destroy(params[:id])
     redirect_to '/bags'
   end
+
+  private
 
   def bags_params
     params.permit(:roast, :ground, :size, :lot_id)
