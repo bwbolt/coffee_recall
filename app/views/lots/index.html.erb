@@ -1,15 +1,18 @@
 <h1>All Lots</h1>
 
-<a class="btn btn-success btn-lg" href="/lots/new" role="button">New Lot</a><br>
+<%= link_to "New Lot", "/lots/new", class:"btn btn-success btn-lg" %><br>
 
-<a href="/lots?sort=number_of_bags">Sort by number of bags</a>
+<%= link_to "Sort by number of bags", "/lots?sort=number_of_bags" %>
 
 <% @lots.each do |lot| %>
-  <h3>
-    <a href="/lots/<%= lot.id %>"><%= lot.name %></a>
-    <%= lot.created_at %>
-  </h3>
-  Bags from this lot:<%= lot.bag_count %>
-  <%= button_to "Edit" , "/lots/#{lot.id}/edit" , method: :get, class: "btn btn-warning btn-xs p-0"%>
-  <%= button_to "Delete Lot" , "/lots/#{lot.id}" , method: :delete, class: "btn btn-danger btn-xs p-0"%>
+  <div>
+    <h3>
+      <%= link_to lot.name, "/lots/#{lot.id}" %>
+    </h3>
+    Created:
+    <%= lot.created_at %><br>
+    Bags from this lot:<%= lot.bag_count %><br>
+    <%= link_to "Edit" , "/lots/#{lot.id}/edit" , method: :get, class: "btn btn-warning btn-xs p-0"%>
+    <%= link_to "Delete Lot" , "/lots/#{lot.id}" , method: :delete, class: "btn btn-danger btn-xs p-0"%>
+  </div><br>
 <% end %>

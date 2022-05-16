@@ -47,7 +47,7 @@ RSpec.describe 'lots#index', type: :feature do
     bag = Bag.create!(roast: 'medium', ground: true, size: 340, lot_id: lot1.id)
     visit '/lots'
     expect(page).to have_content('honduras')
-    expect(page).to have_button('Delete Lot')
+    expect(page).to have_link('Delete Lot')
     click_on('Delete Lot')
     expect(current_path).to eq('/lots')
     expect(page).to_not have_content('honduras')

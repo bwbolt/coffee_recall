@@ -10,5 +10,5 @@
 <p>Updated:
   <%= @bag.updated_at %></p>
 
-<a href="/bags/<%= @bag.id %>/edit">Update Bag</a>
-<p><%= link_to "Delete Bag" , "/bags/#{@bag.id}" , method: :delete%></p>
+<%= link_to "Update Bag", "/bags/#{@bag.id}/edit", class: "btn btn-warning btn-xs p-0" %>
+<%= link_to "Delete Bag" , "/bags/#{@bag.id}" , method: :delete, class: "btn btn-danger btn-xs p-0"%>
