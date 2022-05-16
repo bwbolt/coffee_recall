@@ -22,12 +22,7 @@ class LotsController < ApplicationController
 
   def update
     lot = Lot.find(params[:id])
-    lot.update({
-                 name: params[:name],
-                 lot_number: params[:lot_number],
-                 importer: params[:importer],
-                 organic: params[:organic]
-               })
+    lot.update(lots_params)
     lot.save
     redirect_to "/lots/#{lot.id}"
   end
