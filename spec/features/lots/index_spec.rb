@@ -17,7 +17,7 @@ RSpec.describe 'lots#index', type: :feature do
 
   it 'has a link to it from every page' do
     lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
-    bag = Bag.create!(roast: 'medium', ground: true, size: 340, lot_id: lot1.id)
+    bag = Bag.create!(name: 'medium', ground: true, size: 340, lot_id: lot1.id)
     visit '/'
     expect(page).to have_link('Lots')
     visit '/lots'
@@ -44,7 +44,7 @@ RSpec.describe 'lots#index', type: :feature do
 
   it 'has a delete lot feature' do
     lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
-    bag = Bag.create!(roast: 'medium', ground: true, size: 340, lot_id: lot1.id)
+    bag = Bag.create!(name: 'medium', ground: true, size: 340, lot_id: lot1.id)
     visit '/lots'
     expect(page).to have_content('honduras')
     expect(page).to have_link('Delete Lot')
@@ -55,7 +55,7 @@ RSpec.describe 'lots#index', type: :feature do
 
   it "has a 'sort by bags' button that works" do
     lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
-    bag = Bag.create!(roast: 'medium', ground: true, size: 340, lot_id: lot1.id)
+    bag = Bag.create!(name: 'medium', ground: true, size: 340, lot_id: lot1.id)
     lot2 = Lot.create!(name: 'brazil', importer: 'sweet marias', lot_number: 44, organic: true)
     visit '/lots'
     expect('brazil').to appear_before('honduras')
