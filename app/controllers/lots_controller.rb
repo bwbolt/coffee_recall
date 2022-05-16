@@ -32,19 +32,6 @@ class LotsController < ApplicationController
     redirect_to '/lots'
   end
 
-  def show_children
-    if !params[:size].nil? && params[:size] != ''
-      @lot = Lot.find(params[:id])
-      @bags = @lot.bags_larger_than(params[:size])
-    elsif params[:sort] == 'name'
-      @lot = Lot.find(params[:id])
-      @bags = @lot.bags.order('lower(roast)')
-    else
-      @lot = Lot.find(params[:id])
-      @bags = Bag.where(lot_id: params[:id])
-    end
-  end
-
   private
 
   def lots_params
