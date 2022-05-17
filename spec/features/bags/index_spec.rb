@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'bags#index', type: :feature do
   it 'shows all bags and attributes' do
     lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
-    bag = Bag.create!(name: 'medium', ground: true, size: 340, lot_id: lot1.id)
+    bag = lot1.bags.create!(name: 'medium', ground: true, size: 340)
     visit '/bags'
     expect(page).to have_content(bag.name)
     expect(page).to have_content(bag.created_at)
@@ -16,7 +16,7 @@ RSpec.describe 'bags#index', type: :feature do
 
   it 'has a link to it from every page' do
     lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
-    bag = Bag.create!(name: 'medium', ground: true, size: 340, lot_id: lot1.id)
+    bag = lot1.bags.create!(name: 'medium', ground: true, size: 340)
     visit '/'
     expect(page).to have_link('Bags')
     visit '/lots'
@@ -43,9 +43,9 @@ RSpec.describe 'bags#index', type: :feature do
 
   it "only shows bags with the value 'true' for ground" do
     lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
-    bag1 = Bag.create!(name: 'dark', ground: true, size: 340, lot_id: lot1.id)
-    bag2 = Bag.create!(name: 'medium', ground: false, size: 340, lot_id: lot1.id)
-    bag3 = Bag.create!(name: 'light', ground: true, size: 340, lot_id: lot1.id)
+    bag = lot1.bags.create!(name: 'dark', ground: true, size: 340)
+    bag2 = lot1.bags.create!(name: 'medium', ground: false, size: 340)
+    bag3 = lot1.bags.create!(name: 'light', ground: true, size: 340)
     visit '/bags'
     expect(page).to have_content('dark')
     expect(page).to have_content('light')
@@ -54,7 +54,7 @@ RSpec.describe 'bags#index', type: :feature do
 
   it 'has a working delete bag button for every bag' do
     lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
-    bag1 = Bag.create!(name: 'dark', ground: true, size: 340, lot_id: lot1.id)
+    bag = lot1.bags.create!(name: 'dark', ground: true, size: 340)
     visit '/bags'
     expect(page).to have_content('dark')
     expect(page).to have_link('Delete Bag')

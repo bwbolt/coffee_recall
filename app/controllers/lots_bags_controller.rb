@@ -5,10 +5,10 @@ class LotsBagsController < ApplicationController
       @bags = @lot.bags_larger_than(params[:size])
     elsif params[:sort] == 'name'
       @lot = Lot.find(params[:id])
-      @bags = @lot.bags.order('lower(name)')
+      @bags = @lot.bags_sorted_by_name
     else
       @lot = Lot.find(params[:id])
-      @bags = Bag.where(lot_id: params[:id])
+      @bags = @lot.bags
     end
   end
 end

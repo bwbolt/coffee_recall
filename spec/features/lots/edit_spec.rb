@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'lots#edit', type: :feature do
   it 'show has a working link to a working edit view' do
     lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
-    bag = Bag.create!(name: 'medium', ground: true, size: 340, lot_id: lot1.id)
+    bag = lot1.bags.create!(name: 'medium', ground: true, size: 340)
     visit "/lots/#{lot1.id}"
     expect(page).to have_link('Update Lot')
     click_on 'Update Lot'
@@ -19,6 +19,7 @@ RSpec.describe 'lots#edit', type: :feature do
 
   it 'has a link from lots index' do
     lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
+    bag = lot1.bags.create!(name: 'medium', ground: true, size: 340)
     visit '/lots'
     expect(page).to have_link('Edit')
     click_on('Edit')

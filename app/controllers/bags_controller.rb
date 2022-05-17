@@ -12,7 +12,8 @@ class BagsController < ApplicationController
   end
 
   def create
-    Bag.create(bags_params)
+    lot = Lot.find(params[:id])
+    lot.bags.create(bags_params)
     redirect_to "/lots/#{params[:id]}/bags"
   end
 
@@ -35,6 +36,6 @@ class BagsController < ApplicationController
   private
 
   def bags_params
-    params.permit(:name, :ground, :size, :lot_id)
+    params.permit(:name, :ground, :size)
   end
 end

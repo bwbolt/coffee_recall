@@ -4,9 +4,10 @@ RSpec.describe 'lots#show_children', type: :feature do
   it 'shows all bags associated with that particular lot' do
     lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
     lot2 = Lot.create!(name: 'guat', importer: 'lamanita', lot_number: 67, organic: true)
-    bag1 = Bag.create!(name: 'medium', ground: true, size: 340, lot_id: lot1.id)
-    bag2 = Bag.create!(name: 'dark', ground: true, size: 60, lot_id: lot2.id)
-    bag3 = Bag.create!(name: 'light', ground: true, size: 60, lot_id: lot1.id)
+    bag1 = lot1.bags.create!(name: 'medium', ground: true, size: 340)
+    bag2 = lot2.bags.create!(name: 'dark', ground: true, size: 60)
+    bag3 = lot1.bags.create!(name: 'light', ground: true, size: 60)
+
     visit "/lots/#{lot1.id}/bags"
     expect(page).to have_content(bag1.name)
     expect(page).to have_content(bag1.ground)
@@ -24,9 +25,10 @@ RSpec.describe 'lots#show_children', type: :feature do
 
   it "has a working button to sort by 'name' (name)" do
     lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
-    bag1 = Bag.create!(name: 'light', ground: true, size: 340, lot_id: lot1.id)
-    bag2 = Bag.create!(name: 'dark', ground: true, size: 60, lot_id: lot1.id)
-    bag3 = Bag.create!(name: 'medium', ground: true, size: 500, lot_id: lot1.id)
+    bag1 = lot1.bags.create!(name: 'light', ground: true, size: 340)
+    bag2 = lot1.bags.create!(name: 'dark', ground: true, size: 60)
+    bag3 = lot1.bags.create!(name: 'medium', ground: true, size: 500)
+
     visit "/lots/#{lot1.id}/bags"
     expect(bag1.name).to appear_before(bag2.name)
     expect(page).to have_link('Sort')
@@ -37,9 +39,9 @@ RSpec.describe 'lots#show_children', type: :feature do
 
   it 'has a display by size input' do
     lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
-    bag1 = Bag.create!(name: 'light', ground: true, size: 340, lot_id: lot1.id)
-    bag2 = Bag.create!(name: 'dark', ground: true, size: 60, lot_id: lot1.id)
-    bag3 = Bag.create!(name: 'medium', ground: true, size: 500, lot_id: lot1.id)
+    bag1 = lot1.bags.create!(name: 'light', ground: true, size: 340)
+    bag2 = lot1.bags.create!(name: 'dark', ground: true, size: 60)
+    bag3 = lot1.bags.create!(name: 'medium', ground: true, size: 500)
     visit "/lots/#{lot1.id}/bags"
     expect(page).to have_content('dark')
     expect(page).to have_button('Search By Bag Size')
