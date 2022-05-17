@@ -1,10 +1,5 @@
 class BagsController < ApplicationController
   def index
-    @bags = Bag.where(ground: true)
-  end
-
-  def index
-    # binding.pry
     @bags = if !params[:exact_match].nil? && params[:exact_match] != ''
               Bag.name_exactly_like(params[:exact_match])
             elsif !params[:similar].nil? && params[:similar] != ''
