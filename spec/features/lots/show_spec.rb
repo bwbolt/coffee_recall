@@ -16,9 +16,9 @@ RSpec.describe 'lots#show', type: :feature do
   it 'shows how many bags are associated with this lot' do
     lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
     lot2 = Lot.create!(name: 'guat', importer: 'lamanita', lot_number: 67, organic: true)
-    bag1 = Bag.create!(name: 'medium', ground: true, size: 340, lot_id: lot1.id)
-    bag2 = Bag.create!(name: 'dark', ground: true, size: 60, lot_id: lot2.id)
-    bag3 = Bag.create!(name: 'light', ground: true, size: 60, lot_id: lot1.id)
+    bag1 = lot1.bags.create!(name: 'medium', ground: true, size: 340)
+    bag2 = lot2.bags.create!(name: 'dark', ground: true, size: 60)
+    bag3 = lot1.bags.create!(name: 'light', ground: true, size: 60)
     visit "/lots/#{lot1.id}"
     expect(page).to have_content('Number of Bags from this lot: 2')
     visit "/lots/#{lot2.id}"
@@ -27,14 +27,14 @@ RSpec.describe 'lots#show', type: :feature do
 
   it 'has link to associated bags' do
     lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
-    bag = Bag.create!(name: 'medium', ground: true, size: 340, lot_id: lot1.id)
+    bag = lot1.bags.create!(name: 'medium', ground: true, size: 340)
     visit "/lots/#{lot1.id}"
     expect(page).to have_link('Bags made from this lot')
   end
 
   it 'has a button to delete the lot and all associated bags' do
     lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
-    bag = Bag.create!(name: 'Slightly Dangerous', ground: true, size: 340, lot_id: lot1.id)
+    bag = lot1.bags.create!(name: 'Slightly Dangerous', ground: true, size: 340)
     visit '/bags'
     expect(page).to have_content('Slightly Dangerous')
     visit "/lots/#{lot1.id}"
