@@ -22,4 +22,12 @@ class Lot < ApplicationRecord
   def bags_sorted_by_name
     bags.order('lower(name)')
   end
+
+  def self.name_exactly_like(word)
+    where(name: word)
+  end
+
+  def self.name_partially_like(word)
+    where('lower(name) LIKE?', "%#{word.downcase}%")
+  end
 end
