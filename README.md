@@ -1,24 +1,60 @@
-# README
+# Relational Rails - Coffee Recall Portal
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+---
+The Relational Rails project requires **building a relational database** with a one-to-many or parent/child relationship, and utilizing the **Rails framework** to create a website with **CRUD (create, read, update, delete) functionality**.
 
-Things you may want to cover:
+With this in mind, the Coffee Recall Portal allows users to interact with a database, adding lots and subsequent associated bags, in order to track what bags were made from what lot incase of a needed recall based on health concerns.
+Users can:
+  - Search for particular lots and particular bags
+  - Sort by quantity of bags created from a lot
+  - Sort by date created
 
-* Ruby version
+### Prerequisites
 
-* System dependencies
+Users will need Ruby 2.7.4 - you can run the following command in your terminal (see https://github.com/rbenv/rbenv if you don't yet have rbenv)
 
-* Configuration
+```
+rbenv local 2.7.4
+```
 
-* Database creation
 
-* Database initialization
+### Installing
 
-* How to run the test suite
+Run the following commands in your terminal to get the project up and running
 
-* Services (job queues, cache servers, search engines, etc.)
+Clone the project onto your local machine
 
-* Deployment instructions
+```
+git clone git@github.com:bwbolt/coffee_recall.git
+```
 
-* ...
+
+Bundle install the associated gems and check for updates
+
+```
+bundle install
+bundle update
+```
+
+## Running the tests
+
+Tests are written in RSpec - run the following command in your terminal to execute all tests
+
+```
+bundle exec rspec
+```
+
+## Viewing the Website
+
+Start the Rails Server
+
+```
+rails s
+```
+
+#### Open http://localhost:3000/ in a web browser
+
+Click around and enjoy the extra piece of mind when operating your (coffee) buisness!
+
+# Visual Representation of Database Schema
+![image](/lib/assets/images/schema.png)
