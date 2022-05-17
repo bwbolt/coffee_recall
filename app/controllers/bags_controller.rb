@@ -3,6 +3,17 @@ class BagsController < ApplicationController
     @bags = Bag.where(ground: true)
   end
 
+  def index
+    # binding.pry
+    @bags = if !params[:exact_match].nil? && params[:exact_match] != ''
+              Bag.name_exactly_like(params[:exact_match])
+            elsif !params[:similar].nil? && params[:similar] != ''
+              Bag.name_partially_like(params[:similar])
+            else
+              Bag.where(ground: true)
+            end
+  end
+
   def show
     @bag = Bag.find(params[:id])
   end
