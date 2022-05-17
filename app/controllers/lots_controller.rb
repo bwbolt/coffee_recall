@@ -1,9 +1,9 @@
 class LotsController < ApplicationController
   def index
     @lots = if params[:sort] == 'number_of_bags'
-              Lot.all.sort_by { |lot| lot.bag_count }.reverse
+              Lot.sort_by_bag_count
             else
-              Lot.order(created_at: :desc)
+              Lot.sort_by_creation_date
             end
   end
 
