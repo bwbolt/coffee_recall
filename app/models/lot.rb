@@ -18,4 +18,8 @@ class Lot < ApplicationRecord
   def self.sort_by_creation_date
     order(created_at: :desc)
   end
+
+  def bags_sorted_by_name
+    bags.order('lower(name)')
+  end
 end
