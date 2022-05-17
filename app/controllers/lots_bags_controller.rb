@@ -8,7 +8,7 @@ class LotsBagsController < ApplicationController
       @bags = @lot.bags.order('lower(name)')
     else
       @lot = Lot.find(params[:id])
-      @bags = Bag.where(lot_id: params[:id])
+      @bags = @lot.bags
     end
   end
 end
