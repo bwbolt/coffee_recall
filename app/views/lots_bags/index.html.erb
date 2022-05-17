@@ -18,5 +18,6 @@
   <%= bag.created_at %>
   <%= bag.updated_at %>
   <%= link_to "Update Bag", "/bags/#{bag.id}/edit" %>
+  <%= link_to "Delete Bag" , "/bags/#{bag.id}" , method: :delete%>
 </div>
 <% end %>
