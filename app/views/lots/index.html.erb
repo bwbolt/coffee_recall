@@ -2,17 +2,27 @@
 
 <%= link_to "New Lot", "/lots/new", class:"btn btn-success btn-lg" %><br>
 
+<%= form_with url: "/lots?find=word", method: :get, local: true do |form| %>
+<%= form.submit "Search for exact match" %>
+<%= form.text_field :exact_match %>
+<% end %>
+
+<%= form_with url: "/lots?find=word", method: :get, local: true do |form| %>
+<%= form.submit "Search for similar match" %>
+<%= form.text_field :similar %>
+<% end %>
+
 <%= link_to "Sort by number of bags", "/lots?sort=number_of_bags" %>
 
 <% @lots.each do |lot| %>
-  <div>
-    <h3>
-      <%= link_to lot.name, "/lots/#{lot.id}" %>
-    </h3>
-    Created:
-    <%= lot.created_at %><br>
-    Bags from this lot:<%= lot.bag_count %><br>
-    <%= link_to "Edit" , "/lots/#{lot.id}/edit" , method: :get, class: "btn btn-warning btn-xs p-0"%>
-    <%= link_to "Delete Lot" , "/lots/#{lot.id}" , method: :delete, class: "btn btn-danger btn-xs p-0"%>
-  </div><br>
+<div>
+<h3>
+  <%= link_to lot.name, "/lots/#{lot.id}" %>
+</h3>
+Created:
+<%= lot.created_at %><br>
+Bags from this lot:<%= lot.bag_count %><br>
+<%= link_to "Edit" , "/lots/#{lot.id}/edit" , method: :get, class: "btn btn-warning btn-xs p-0"%>
+<%= link_to "Delete Lot" , "/lots/#{lot.id}" , method: :delete, class: "btn btn-danger btn-xs p-0"%>
+</div><br>
 <% end %>

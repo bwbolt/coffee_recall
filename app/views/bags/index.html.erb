@@ -1,13 +1,23 @@
 <h1>All Bags</h1>
 
+<%= form_with url: "/bags?find=word", method: :get, local: true do |form| %>
+<%= form.submit "Search for exact match" %>
+<%= form.text_field :exact_match %>
+<% end %>
+
+<%= form_with url: "/bags?find=word", method: :get, local: true do |form| %>
+<%= form.submit "Search for similar match" %>
+<%= form.text_field :similar %>
+<% end %>
+
 <% @bags.each do |bag| %>
-  <%= link_to "#{bag.name}", "/bags/#{bag.id}" %>
-  <%= bag.ground %>
-  <%= bag.size %>
-  <%= bag.id %>
-  <%= bag.created_at %>
-  <%= bag.updated_at %>
-  <%= link_to "Update Bag", "/bags/#{bag.id}/edit" %>
-  <%= link_to "Delete Bag" , "/bags/#{bag.id}" , method: :delete%>
-  <br>
+<%= link_to "#{bag.name}", "/bags/#{bag.id}" %>
+<%= bag.ground %>
+<%= bag.size %>
+<%= bag.id %>
+<%= bag.created_at %>
+<%= bag.updated_at %>
+<%= link_to "Update Bag", "/bags/#{bag.id}/edit" %>
+<%= link_to "Delete Bag" , "/bags/#{bag.id}" , method: :delete%>
+<br>
 <% end %>

@@ -62,4 +62,30 @@ RSpec.describe 'bags#index', type: :feature do
     expect(current_path).to eq('/bags')
     expect(page).to_not have_content('dark')
   end
+
+  it 'has a working Search by name (exact match) field' do
+    lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
+    bag1 = lot1.bags.create!(name: 'medium', ground: true, size: 340)
+    lot2 = Lot.create!(name: 'brazil', importer: 'sweet marias', lot_number: 44, organic: true)
+    bag2 = lot2.bags.create!(name: 'dark', ground: true, size: 340)
+    visit '/bags'
+    fill_in 'exact_match', with: 'medium'
+    click_on 'Search for exact match'
+    expect(current_path).to eq('/bags')
+    expect(page).to have_content('medium')
+    expect(page).to_not have_content('dark')
+  end
+
+  it 'has a working Search by name (partial match) field' do
+    lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
+    bag1 = lot1.bags.create!(name: 'medium', ground: true, size: 340)
+    lot2 = Lot.create!(name: 'brazil', importer: 'sweet marias', lot_number: 44, organic: true)
+    bag2 = lot2.bags.create!(name: 'dark', ground: true, size: 340)
+    visit '/bags'
+    fill_in 'similar', with: 'da'
+    click_on 'Search for similar match'
+    expect(current_path).to eq('/bags')
+    expect(page).to have_content('dark')
+    expect(page).to_not have_content('medium')
+  end
 end

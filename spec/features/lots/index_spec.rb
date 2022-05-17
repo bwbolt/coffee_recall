@@ -64,4 +64,28 @@ RSpec.describe 'lots#index', type: :feature do
     expect(current_path).to eq('/lots')
     expect('honduras').to appear_before('brazil')
   end
+
+  it 'has a working Search by name (exact match) field' do
+    lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
+    bag = lot1.bags.create!(name: 'medium', ground: true, size: 340)
+    lot2 = Lot.create!(name: 'brazil', importer: 'sweet marias', lot_number: 44, organic: true)
+    visit '/lots'
+    fill_in 'exact_match', with: 'honduras'
+    click_on 'Search for exact match'
+    expect(current_path).to eq('/lots')
+    expect(page).to have_content('honduras')
+    expect(page).to_not have_content('brazil')
+  end
+
+  it 'has a working Search by name (partial match) field' do
+    lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
+    bag = lot1.bags.create!(name: 'medium', ground: true, size: 340)
+    lot2 = Lot.create!(name: 'brazil', importer: 'sweet marias', lot_number: 44, organic: true)
+    visit '/lots'
+    fill_in 'similar', with: 'Hon'
+    click_on 'Search for similar match'
+    expect(current_path).to eq('/lots')
+    expect(page).to have_content('honduras')
+    expect(page).to_not have_content('brazil')
+  end
 end

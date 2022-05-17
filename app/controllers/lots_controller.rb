@@ -1,7 +1,12 @@
 class LotsController < ApplicationController
   def index
+    # binding.pry
     @lots = if params[:sort] == 'number_of_bags'
               Lot.sort_by_bag_count
+            elsif !params[:exact_match].nil? && params[:exact_match] != ''
+              Lot.name_exactly_like(params[:exact_match])
+            elsif !params[:similar].nil? && params[:similar] != ''
+              Lot.name_partially_like(params[:similar])
             else
               Lot.sort_by_creation_date
             end

@@ -46,5 +46,22 @@ RSpec.describe Lot, type: :model do
       bag3 = lot1.bags.create!(name: 'a', ground: true, size: 60)
       expect(lot1.bags_sorted_by_name).to eq([bag1, bag3, bag2])
     end
+    it 'can return all lots with exact name matches' do
+      lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
+      bag1 = lot1.bags.create!(name: 'medium', ground: true, size: 340)
+      bag2 = lot1.bags.create!(name: 'dark', ground: true, size: 60)
+      lot2 = Lot.create!(name: 'guat', importer: 'lamanita', lot_number: 55, organic: false)
+      bag3 = lot2.bags.create!(name: 'medium', ground: true, size: 340)
+      expect(Lot.name_exactly_like('honduras')).to eq([lot1])
+    end
+
+    it 'can return all lots with similar name matches' do
+      lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
+      bag1 = lot1.bags.create!(name: 'medium', ground: true, size: 340)
+      bag2 = lot1.bags.create!(name: 'dark', ground: true, size: 60)
+      lot2 = Lot.create!(name: 'guat', importer: 'lamanita', lot_number: 55, organic: false)
+      bag3 = lot2.bags.create!(name: 'medium', ground: true, size: 340)
+      expect(Lot.name_partially_like('hon')).to eq([lot1])
+    end
   end
 end
