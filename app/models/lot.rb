@@ -12,7 +12,7 @@ class Lot < ApplicationRecord
   end
 
   def self.sort_by_bag_count
-    all.sort_by { |lot| lot.bag_count }.reverse
+    left_joins(:bags).group(:id).order('COUNT(bags.id) DESC')
   end
 
   def self.sort_by_creation_date
