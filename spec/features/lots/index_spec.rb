@@ -18,28 +18,12 @@ RSpec.describe 'lots#index', type: :feature do
   it 'has a link to it from every page' do
     lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
     bag = lot1.bags.create!(name: 'medium', ground: true, size: 340)
-    visit '/'
-    expect(page).to have_link('Lots')
-    visit '/lots'
-    expect(page).to have_link('Lots')
-    visit '/lots/new'
-    expect(page).to have_link('Lots')
-    visit '/lots/new'
-    expect(page).to have_link('Lots')
-    visit "/lots/#{lot1.id}"
-    expect(page).to have_link('Lots')
-    visit "/lots/#{lot1.id}/edit"
-    expect(page).to have_link('Lots')
-    visit "/lots/#{lot1.id}/bags"
-    expect(page).to have_link('Lots')
-    visit '/bags'
-    expect(page).to have_link('Lots')
-    visit "/bags/#{bag.id}"
-    expect(page).to have_link('Lots')
-    visit "/bags/#{bag.id}/edit"
-    expect(page).to have_link('Lots')
-    visit "/lots/#{lot1.id}/bags/new"
-    expect(page).to have_link('Lots')
+    uris = ['/', '/lots', '/lots/new', "/lots/#{lot1.id}", "/lots/#{lot1.id}/edit", "/lots/#{lot1.id}/bags", '/bags',
+            "/bags/#{bag.id}", "/bags/#{bag.id}/edit", "/lots/#{lot1.id}/bags/new"]
+    uris.each do |uri|
+      visit uri
+      expect(page).to have_link('Lots')
+    end
   end
 
   it 'has a delete lot feature' do
