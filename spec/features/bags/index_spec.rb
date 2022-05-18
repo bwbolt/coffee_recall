@@ -40,9 +40,11 @@ RSpec.describe 'bags#index', type: :feature do
     lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
     bag = lot1.bags.create!(name: 'dark', ground: true, size: 340)
     visit '/bags'
-    expect(page).to have_content('dark')
-    expect(page).to have_link('Delete Bag')
-    click_link('Delete Bag')
+    within("#bag-#{bag.id}") do
+      expect(page).to have_content('dark')
+      expect(page).to have_link('Delete Bag')
+      click_link('Delete Bag')
+    end
     expect(current_path).to eq('/bags')
     expect(page).to_not have_content('dark')
   end

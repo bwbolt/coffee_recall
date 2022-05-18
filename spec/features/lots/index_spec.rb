@@ -26,13 +26,15 @@ RSpec.describe 'lots#index', type: :feature do
     end
   end
 
-  it 'has a delete lot feature' do
+  it 'has a delete lot feature for every lot' do
     lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
     bag = lot1.bags.create!(name: 'medium', ground: true, size: 340)
     visit '/lots'
-    expect(page).to have_content('honduras')
-    expect(page).to have_link('Delete Lot')
-    click_on('Delete Lot')
+    within("#lot-#{lot1.id}") do
+      expect(page).to have_content('honduras')
+      expect(page).to have_link('Delete Lot')
+      click_on('Delete Lot')
+    end
     expect(current_path).to eq('/lots')
     expect(page).to_not have_content('honduras')
   end
