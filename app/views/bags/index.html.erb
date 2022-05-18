@@ -8,16 +8,32 @@
 <%= form_with url: "/bags?find=word", method: :get, local: true do |form| %>
 <%= form.submit "Search for similar match" %>
 <%= form.text_field :similar %>
-<% end %>
+<% end %><br>
+
+<table class="table table-striped">
+<thead>
+<tr>
+  <th>Name</th>
+  <th>Ground?</th>
+  <th>Size</th>
+  <th>ID</th>
+  <th>Date Created</th>
+  <th>Date Updated</th>
+</tr>
+</thead>
+<tbody>
 
 <% @bags.each do |bag| %>
-<%= link_to "#{bag.name}", "/bags/#{bag.id}" %>
-<%= bag.ground %>
-<%= bag.size %>
-<%= bag.id %>
-<%= bag.created_at %>
-<%= bag.updated_at %>
-<%= link_to "Update Bag", "/bags/#{bag.id}/edit" %>
-<%= link_to "Delete Bag" , "/bags/#{bag.id}" , method: :delete%>
-<br>
+  <tr id="bag-<%= bag.id %>">
+    <td><%= link_to "#{bag.name}", "/bags/#{bag.id}" %></td>
+    <td><%= bag.ground %></td>
+    <td><%= bag.size %></td>
+    <td><%= bag.id %></td>
+    <td><%= bag.created_at %></td>
+    <td><%= bag.updated_at %></td>
+    <td><%= link_to "Update Bag", "/bags/#{bag.id}/edit" %></td>
+    <td><%= link_to "Delete Bag" , "/bags/#{bag.id}" , method: :delete%></td>
+  </tr>
 <% end %>
+</tbody>
+</table>

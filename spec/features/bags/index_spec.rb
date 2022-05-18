@@ -17,28 +17,12 @@ RSpec.describe 'bags#index', type: :feature do
   it 'has a link to it from every page' do
     lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
     bag = lot1.bags.create!(name: 'medium', ground: true, size: 340)
-    visit '/'
-    expect(page).to have_link('Bags')
-    visit '/lots'
-    expect(page).to have_link('Bags')
-    visit '/lots/new'
-    expect(page).to have_link('Bags')
-    visit '/lots/new'
-    expect(page).to have_link('Bags')
-    visit "/lots/#{lot1.id}"
-    expect(page).to have_link('Bags')
-    visit "/lots/#{lot1.id}/edit"
-    expect(page).to have_link('Bags')
-    visit "/lots/#{lot1.id}/bags"
-    expect(page).to have_link('Bags')
-    visit '/bags'
-    expect(page).to have_link('Bags')
-    visit "/bags/#{bag.id}"
-    expect(page).to have_link('Bags')
-    visit "/bags/#{bag.id}/edit"
-    expect(page).to have_link('Bags')
-    visit "/lots/#{lot1.id}/bags/new"
-    expect(page).to have_link('Bags')
+    uris = ['/', '/lots', '/lots/new', "/lots/#{lot1.id}", "/lots/#{lot1.id}/edit", "/lots/#{lot1.id}/bags", '/bags',
+            "/bags/#{bag.id}", "/bags/#{bag.id}/edit", "/lots/#{lot1.id}/bags/new"]
+    uris.each do |uri|
+      visit uri
+      expect(page).to have_link('Bags')
+    end
   end
 
   it "only shows bags with the value 'true' for ground" do
@@ -56,9 +40,11 @@ RSpec.describe 'bags#index', type: :feature do
     lot1 = Lot.create!(name: 'honduras', importer: 'lamanita', lot_number: 55, organic: false)
     bag = lot1.bags.create!(name: 'dark', ground: true, size: 340)
     visit '/bags'
-    expect(page).to have_content('dark')
-    expect(page).to have_link('Delete Bag')
-    click_link('Delete Bag')
+    within("#bag-#{bag.id}") do
+      expect(page).to have_content('dark')
+      expect(page).to have_link('Delete Bag')
+      click_link('Delete Bag')
+    end
     expect(current_path).to eq('/bags')
     expect(page).to_not have_content('dark')
   end

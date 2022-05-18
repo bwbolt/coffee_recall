@@ -31,8 +31,8 @@ RSpec.describe 'lots#show_children', type: :feature do
 
     visit "/lots/#{lot1.id}/bags"
     expect(bag1.name).to appear_before(bag2.name)
-    expect(page).to have_link('Sort')
-    click_link('Sort')
+    expect(page).to have_link('Sort by Name')
+    click_link('Sort by Name')
     expect(current_path).to eq("/lots/#{lot1.id}/bags")
     expect(bag2.name).to appear_before(bag3.name)
   end
